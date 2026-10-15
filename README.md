@@ -14,6 +14,16 @@ Search millions of movies and TV shows, browse what's trending this week, and ke
 
 ---
 
+## Design
+
+A late-night cinema look: near-black background, marquee-bulb yellow accents and tall condensed headings (Big Shoulders Display) with Instrument Sans for reading text.
+
+- **Featured hero:** this week's #1 title with its backdrop, rating, genres, overview and a watchlist button
+- **Ranked poster grid:** trending titles carry a 1–10 badge; hover or focus a poster to read the overview; bookmark straight from the poster
+- **Ticket-stub watchlist:** saved titles appear as tickets with a perforated edge
+- **Clear states:** loading skeletons, a friendly "nothing found" message, and a "Couldn't reach the movie database" panel with a **Try again** button when the API is offline
+- **Accessible:** labelled buttons, keyboard focus rings, screen-reader text for ranks and ratings, reduced-motion support
+
 ## Features
 
 - **Search movies or TV shows:** switch between the two with a toggle and search by title
@@ -29,7 +39,7 @@ Search millions of movies and TV shows, browse what's trending this week, and ke
 |---|---|
 | Framework | Next.js 16 (App Router), React 19 |
 | Language | TypeScript |
-| UI | Tailwind CSS 4, shadcn/ui, Lucide icons |
+| UI | Tailwind CSS 4, Lucide icons, Big Shoulders Display + Instrument Sans via Fontsource |
 | Data | [TMDB API v3](https://developer.themoviedb.org/docs) |
 | Storage | Browser `localStorage` for the watchlist |
 
@@ -77,7 +87,8 @@ app/
 ├── loading.tsx           # loading state
 └── globals.css
 components/
-├── movie-app.tsx         # state: query, media type, results, pages, active tab
+├── movie-app.tsx         # state: query, media type, results, pages, active tab, error/retry
+├── featured.tsx          # hero for the #1 trending title
 ├── header.tsx            # logo and Discover / Watchlist tabs
 ├── search-bar.tsx        # search input with Movies / TV Shows toggle
 ├── movie-list.tsx        # results grid

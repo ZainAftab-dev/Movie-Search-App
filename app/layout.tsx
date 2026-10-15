@@ -1,16 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import "@fontsource-variable/big-shoulders-display"
+import "@fontsource-variable/instrument-sans"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "MovieFinder - Search Movies & TV Shows",
   description: "Search and discover movies and TV shows using TMDB. Create your personal watchlist.",
-  generator: "v0.app",
   icons: {
     icon: [
       {
@@ -36,8 +34,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className="dark">
+      <body className="bg-night font-sans text-cream antialiased">
         {children}
         <Analytics />
       </body>

@@ -1,7 +1,6 @@
 "use client"
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
 
 interface PaginationProps {
   currentPage: number
@@ -13,58 +12,62 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
   if (totalPages <= 1) return null
 
   const maxVisiblePages = 5
-  const pages: number[] = []
-
   let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
   const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1)
+  if (endPage - startPage + 1 < maxVisiblePages) startPage = Math.max(1, endPage - maxVisiblePages + 1)
+  const pages: number[] = []
+  for (let i = startPage; i <= endPage; i++) pages.push(i)
 
-  if (endPage - startPage + 1 < maxVisiblePages) {
-    startPage = Math.max(1, endPage - maxVisiblePages + 1)
-  }
-
-  for (let i = startPage; i <= endPage; i++) {
-    pages.push(i)
-  }
+  const base = "grid h-10 min-w-10 place-items-center rounded-full px-3 text-sm font-semibold tabular-nums transition-colors"
+  const idle = "text-dust hover:bg-curtain-2 hover:text-cream"
 
   return (
-    <div className="flex items-center justify-center gap-2 py-8">
-      <Button variant="outline" size="icon" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+    <nav aria-label="Pages" className="flex items-center justify-center gap-1 py-10">
+      <button
+        type="button"
+        className={`${base} ${idle} disabled:opacity-30`}
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        aria-label="Previous page"
+      >
         <ChevronLeft className="h-4 w-4" />
-      </Button>
+      </button>
       {startPage > 1 && (
         <>
-          <Button variant="outline" size="sm" onClick={() => onPageChange(1)}>
+          <button type="button" className={`${base} ${idle}`} onClick={() => onPageChange(1)}>
             1
-          </Button>
-          {startPage > 2 && <span className="px-2 text-muted-foreground">...</span>}
+          </button>
+          {startPage > 2 && <span className="px-1 text-dust">…</span>}
         </>
       )}
       {pages.map((page) => (
-        <Button
+        <button
           key={page}
-          variant={page === currentPage ? "default" : "outline"}
-          size="sm"
+          type="button"
+          aria-current={page === currentPage ? "page" : undefined}
+          className={`${base} ${page === currentPage ? "bg-bulb text-night" : idle}`}
           onClick={() => onPageChange(page)}
         >
           {page}
-        </Button>
+        </button>
       ))}
       {endPage < totalPages && (
         <>
-          {endPage < totalPages - 1 && <span className="px-2 text-muted-foreground">...</span>}
-          <Button variant="outline" size="sm" onClick={() => onPageChange(totalPages)}>
+          {endPage < totalPages - 1 && <span className="px-1 text-dust">…</span>}
+          <button type="button" className={`${base} ${idle}`} onClick={() => onPageChange(totalPages)}>
             {totalPages}
-          </Button>
+          </button>
         </>
       )}
-      <Button
-        variant="outline"
-        size="icon"
+      <button
+        type="button"
+        className={`${base} ${idle} disabled:opacity-30`}
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
+        aria-label="Next page"
       >
         <ChevronRight className="h-4 w-4" />
-      </Button>
-    </div>
+      </button>
+    </nav>
   )
 }
