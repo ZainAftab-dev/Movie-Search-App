@@ -1,89 +1,107 @@
-# Movie Search App
+<div align="center">
 
-A modern movie and TV show search application built with Next.js, React, and the TMDB API.
+# 🎬 MovieFinder: Movie & TV Search
 
-**Author:** Zain Aftab
+Search millions of movies and TV shows, browse what's trending this week, and keep a personal watchlist. Built with Next.js, React and The Movie Database (TMDB) API.
+
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![TMDB](https://img.shields.io/badge/API-TMDB-01B4E4?logo=themoviedatabase&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+</div>
+
+---
 
 ## Features
 
-- **Search Movies & TV Shows** - Toggle between searching movies or TV shows with real-time results
-- **Trending Content** - View top 10 trending movies or TV shows on the homepage
-- **Detailed Cards** - Each card displays poster, title, release year, rating, genres, and overview on hover
-- **Watchlist** - Add and remove items from your personal watchlist (persisted in localStorage)
-- **Pagination** - Navigate through large search results with ease
-- **Responsive Design** - Works seamlessly on desktop and mobile devices
+- **Search movies or TV shows:** switch between the two with a toggle and search by title
+- **Trending this week:** the home page shows the top 10 trending movies or shows
+- **Rich cards:** poster, title, release year, rating and up to two genres; hover to read the overview
+- **Watchlist:** add or remove titles with one click; the list is saved in your browser (`localStorage`) and has its own tab
+- **Pagination:** page through long search results (up to TMDB's 500-page limit)
+- **Loading and empty states,** plus a responsive grid that works on phones and desktops
 
-## Tech Stack
+## Tech stack
 
-- **Framework:** Next.js 15 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **UI Components:** shadcn/ui
-- **API:** The Movie Database (TMDB)
+| Layer | Tools |
+|---|---|
+| Framework | Next.js 16 (App Router), React 19 |
+| Language | TypeScript |
+| UI | Tailwind CSS 4, shadcn/ui, Lucide icons |
+| Data | [TMDB API v3](https://developer.themoviedb.org/docs) |
+| Storage | Browser `localStorage` for the watchlist |
 
-## Getting Started
+## Getting started
 
-### Prerequisites
+**Requirements:** Node.js 18.18 or newer and a free TMDB API key ([get one here](https://www.themoviedb.org/settings/api)).
 
-- Node.js 18+ installed
-- A TMDB API key (get one free at [themoviedb.org/settings/api](https://www.themoviedb.org/settings/api))
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   cd movie-search-app
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Add your TMDB API key in `lib/tmdb.ts`:
-   ```typescript
-   const API_KEY = "your_api_key_here"
-   ```
-
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Project Structure
-
-```
-├── app/
-│   ├── page.tsx          # Main page with Suspense wrapper
-│   ├── layout.tsx        # Root layout
-│   ├── loading.tsx       # Loading state
-│   └── globals.css       # Global styles
-├── components/
-│   ├── movie-app.tsx     # Main application component
-│   ├── movie-card.tsx    # Individual movie/TV show card
-│   ├── movie-list.tsx    # Grid of movie cards
-│   ├── search-bar.tsx    # Search input with media type toggle
-│   ├── header.tsx        # App header
-│   ├── watchlist.tsx     # Watchlist sidebar
-│   └── pagination.tsx    # Pagination controls
-├── hooks/
-│   └── use-watchlist.ts  # Custom hook for watchlist management
-├── lib/
-│   └── tmdb.ts           # TMDB API functions and types
+```bash
+git clone https://github.com/ZainAftab-dev/Movie-Search-App.git
+cd Movie-Search-App
+npm install
 ```
 
-## API Reference
+Put your API key in `lib/tmdb.ts`:
 
-The app uses the following TMDB API endpoints:
+```ts
+export const TMDB_API_KEY = "your_tmdb_api_key"
+```
 
-- `/search/movie` - Search for movies
-- `/search/tv` - Search for TV shows
-- `/trending/movie/week` - Get trending movies
-- `/trending/tv/week` - Get trending TV shows
+Then start the app:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000). For a production build: `npm run build` then `npm start`.
+
+## TMDB endpoints used
+
+| Endpoint | Used for |
+|---|---|
+| `GET /trending/movie/week` | Trending movies on the home page |
+| `GET /trending/tv/week` | Trending TV shows on the home page |
+| `GET /search/movie` | Movie search with pagination |
+| `GET /search/tv` | TV search with pagination |
+
+Posters are loaded from `image.tmdb.org`.
+
+## Project structure
+
+```
+app/
+├── layout.tsx            # root layout and metadata
+├── page.tsx              # renders <MovieApp /> inside Suspense
+├── loading.tsx           # loading state
+└── globals.css
+components/
+├── movie-app.tsx         # state: query, media type, results, pages, active tab
+├── header.tsx            # logo and Discover / Watchlist tabs
+├── search-bar.tsx        # search input with Movies / TV Shows toggle
+├── movie-list.tsx        # results grid
+├── movie-card.tsx        # poster card with rating, genres, overview and watchlist button
+├── pagination.tsx        # page controls
+└── watchlist.tsx         # saved titles
+hooks/
+└── use-watchlist.ts      # watchlist state synced with localStorage
+lib/
+└── tmdb.ts               # API calls, types and genre names
+```
+
+## Deployment
+
+Import the repository into [Vercel](https://vercel.com/new) and deploy with the default settings.
+
+## Credits
+
+This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+## Author
+
+**Zain Aftab** · [GitHub](https://github.com/ZainAftab-dev) · [LinkedIn](https://www.linkedin.com/in/zain-aftab-563727295/)
 
 ## License
 
-This project is open source and available under the MIT License.
+[MIT](LICENSE)
