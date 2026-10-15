@@ -10,6 +10,10 @@ Search millions of movies and TV shows, browse what's trending this week, and ke
 ![TMDB](https://img.shields.io/badge/API-TMDB-01B4E4?logo=themoviedatabase&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+**[▶ Live demo: moviefinder-zain.vercel.app](https://moviefinder-zain.vercel.app)**
+
+<img src="docs/screenshot.png" alt="MovieFinder home page with this week's #1 trending film and the ranked poster grid" width="640"/>&nbsp;<img src="docs/mobile.png" alt="MovieFinder on a phone" width="190"/>
+
 </div>
 
 ---
@@ -103,11 +107,15 @@ lib/
 
 ## Deployment
 
-Import the repository into [Vercel](https://vercel.com/new) and deploy with the default settings.
+Live at [moviefinder-zain.vercel.app](https://moviefinder-zain.vercel.app). To deploy your own copy, import the repository into [Vercel](https://vercel.com/new) and deploy with the default settings.
 
 ## Credits
 
 This product uses the TMDB API but is not endorsed or certified by TMDB.
+
+## Screenshots
+
+The screenshots above are taken from the live site by the **Update screenshots** GitHub Action (`.github/workflows/screenshots.yml`). Run it from the Actions tab to refresh them after a redesign.
 
 ## Author
 
